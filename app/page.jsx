@@ -1,6 +1,7 @@
 "use client";
 
 import { assets } from "@/assets/assets";
+import Message from "@/components/Message";
 import PromptBox from "@/components/PromptBox";
 import Sidebar from "@/components/Sidebar";
 import Image from "next/image";
@@ -32,10 +33,12 @@ export default function Home() {
             <Image src={assets.logo_icon} alt="logo_icon" className="h-16" />
             <p className="text-2xl font-medium">Hi, I'm DeepSeek.</p>
           </div>
-          <p className="text-sm mt-2">How can I help today?</p>
+          <p className="text-sm mt-2 mb-4">How can I help today?</p>
           </>)
             :
-            (<div></div>)
+            (<div>
+              <Message role={'user'} content={"what is next js"} />
+            </div>)
             }
             {/* prompt box */}
             <PromptBox isLoading={isLoading} setIsLoading={setIsLoading} />
