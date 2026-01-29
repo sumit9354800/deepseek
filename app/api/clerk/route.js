@@ -21,8 +21,8 @@ export async function POST(req) {
     // Prepare the user data to be saved in the database
 
     const userData = {
-        _id: data._d,
-        email:data.email_addresses[0]?.email_addresses,
+        _id: data.id,
+        email:data.email_addresses[0].email_addresses,
         name: `${data.first_name} ${data.last_name}`,
         image: data.image_url,
     }
