@@ -7,8 +7,8 @@ import ChatLable from "./ChatLable";
 
 const Sidebar = ({ expand, setExpand }) => {
   const { openSignIn } = useClerk();
-  const { user } = useAppConext();
-  const { openMenu, setOpenMenu } = useState({ id: 0, open: false });
+  const { user, chats, createNewChat } = useAppConext();
+  const [openMenu, setOpenMenu] = useState({ id: 0, open: false });
 
   return (
     <div
@@ -24,7 +24,7 @@ const Sidebar = ({ expand, setExpand }) => {
             alt="sidebar"
           />
           <div
-            onClick={() => (expand ? setExpand(true) : setExpand(false))}
+            onClick={() => (expand ? setExpand(false) : setExpand(true))}
             className="group relative flex items-center justify-center hover:bg-gray-500/20 transition-all duration-300 h-9 w-9 aspect-square rounded-lg cursor-pointer"
           >
             <Image src={assets.menu_icon} className="md:hidden" alt="sidebar" />
@@ -43,7 +43,7 @@ const Sidebar = ({ expand, setExpand }) => {
             </div>
           </div>
         </div>
-        <button
+        <button onClick={createNewChat}
           className={`mt-8 flex items-center justify-center cursor-pointer ${expand ? "bg-primary hover:opacity-90 rounded-2xl gap-2 p-2.5 w-max" : "group relative h-9 w-9 mx-auto hover:bg-gray-500/30 rounded-lg"}`}
         >
           <Image
@@ -62,9 +62,10 @@ const Sidebar = ({ expand, setExpand }) => {
         >
           <p className="my-1">Recents</p>
           {/* chatLable */}
-          <ChatLable openMenu={openMenu} setOpenMenu={setOpenMenu} />
+          {chats.map((chat,index) => <ChatLable name={chat.name} id={chat._id} key={index} openMenu={openMenu} setOpenMenu={setOpenMenu} />)}
+          
         </div>
-      </div>
+      </div>  
       <div>
         <div
           className={`flex items-center cursor-pointer group relative ${expand ? "gap-1 text-white/80 text-sm p-2.5 border border-primary rounded-lg hover:bg-white/10 cursor-pointer" : "h-10 w-10 mx-auto hover:bg-gray-500/30 rounded-lg"}`}
